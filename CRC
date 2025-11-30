@@ -31,3 +31,23 @@ codeword = data + crc
 
 print("CRC remainder:", crc)
 print("Transmitted codeword:", codeword)
+
+output:
+
+CRC remainder: 00001111
+Transmitted codeword: 1011001000001111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
