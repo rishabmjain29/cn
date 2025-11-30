@@ -1,0 +1,31 @@
+bucket_size = 10
+out_rate = 5
+incoming_packets = [4, 6, 3, 7]
+
+bucket = 0
+dropped = 0
+
+print("Cycle | Incoming | Sent | Stored | Dropped")
+for i, packet in enumerate(incoming_packets, start=1):
+    bucket += packet
+    if bucket > bucket_size:
+        dropped += bucket - bucket_size
+        bucket = bucket_size
+    
+    sent = min(bucket, out_rate)
+    bucket -= sent
+    
+    print(f"{i:5} | {packet:8} | {sent:4} | {bucket:6} | {dropped:7}")
+    
+print("\nTotal dropped packets:", dropped)
+print("Final bucket content:", bucket)
+
+OUTPUT:
+Cycle | Incoming | Sent | Stored | Dropped
+    1 |        4 |    4 |      0 |       0
+    2 |        6 |    5 |      1 |       0
+    3 |        3 |    4 |      0 |       0
+    4 |        7 |    5 |      2 |       2
+
+Total dropped packets: 2
+Final bucket content: 2
