@@ -1,0 +1,35 @@
+Server side:
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("localhost", 9999))
+server.listen(1)
+
+print("TCP Server is waiting for connection...")
+conn, addr = server.accept()
+print("Connected with:", addr)
+
+data = conn.recv(1024).decode()
+print("Client:", data)
+
+conn.send("Message received via TCP".encode())
+conn.close()
+output:
+TCP Server is waiting for connection...
+Connected with: ('127.0.0.1', 50125)
+Client: Hello Server, this is TCP Client
+
+
+client side:
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("localhost", 9999))
+
+client.send("Hello Server, this is TCP Client".encode())
+print(client.recv(1024).decode())
+
+client.close()
+output:Message received via TCP
+
+
